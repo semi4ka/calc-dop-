@@ -1,7 +1,7 @@
 import React from "react";
 
-const LeftPanel =({handleLeftPanel})=>{
-return (
+const LeftPanel = ({ handleLeftPanel }) => {
+  return (
     <div className="leftPanel" onClick={handleLeftPanel}>
       <div className="numbers">
         <div>7</div>
@@ -24,7 +24,7 @@ return (
         <div>AC</div>
       </div>
     </div>
-)
-}
+  );
+};
 
 export default LeftPanel;
