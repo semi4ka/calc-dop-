@@ -106,3 +106,10 @@
   div.equal:active {
     font-weight: bold;
   }
+.scoreboardTxt{
+  position: absolute;
+  font-size: 14px;
+  color: #ccc;
+  padding-left: 5px;
+  padding-top: 5px;
+}

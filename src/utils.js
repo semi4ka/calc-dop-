@@ -1,23 +1,23 @@
-export const mathAction=(operator, res, b)=>{
+export const mathAction=(operator, a, b)=>{
+  let  resNum=0;
     switch (operator) {
       case '+':
-        console.log('res+b',res+b);
-        return res+b; 
+         resNum = a+b;
+         break; 
       case '-':
-        console.log('res-b',res-b);
-        
-        return res-b;
+         resNum = a-b;
+         break;
       case '/':
-        console.log('res/b',res/b);
-        
-        return res/b;
+        resNum = a/b;
+      break;
         case '*':
-          console.log('res*b',res*b);
-        
-          return res*b;
+          resNum = a*b;
+          break;
     
       default:
-        console.log('def')
+        console.log('default err');
         break;
     }
+    resNum = Math.floor(resNum * 1000) / 1000;
+    return {resNum: resNum, resTxt: `${a}${operator}${b}=${resNum}`};
    }

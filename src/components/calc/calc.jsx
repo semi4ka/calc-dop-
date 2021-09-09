@@ -7,6 +7,7 @@ import {mathAction} from "../../utils";
 
 const Calc = ()=>{
   const [scoreboard, setScoreboard]=useState(0);
+  const [history, setHistory]=useState('');
   const [isNewScore, setIsNewScore]=useState(false);
   const [res, setRes] = useState(0);
   const [operator, setOperator] = useState(null);
@@ -21,15 +22,14 @@ const Calc = ()=>{
     setRes(0);
     setOperator(null);
    }else{
-      if(isNewScore){
-        const trueVal = txt.slice(-1);
+      if(isNewScore){ // если новый набор
+        let trueVal = txt.slice(-1);
         console.log('slice', trueVal);
+        if(trueVal==='.') trueVal='0.'
         setScoreboard(trueVal);
         setIsNewScore(false);
       }else{
-        console.log(txt);
-        if(txt.indexOf(0)===0) 
-          txt=txt.slice(1);
+        console.log(txt); 
         setScoreboard((scoreboard===0?'':scoreboard)+txt);
       }
    }
@@ -42,7 +42,9 @@ const Calc = ()=>{
   console.log('scoreboard', scoreboard);
   console.log(currentNum, "currentNum");
   if(operator){
-    setRes(mathAction(operator, res, currentNum));
+    const {resNum, resTxt}=mathAction(operator, res, currentNum);
+    setRes(resNum);
+    setHistory(resTxt);
   }else{
     setRes(currentNum);
   }
@@ -54,10 +56,12 @@ const Calc = ()=>{
  const handleRes = (e)=>{
   const currentNum = Number(scoreboard);
   if(operator){
-    const res2 = mathAction(operator, res, currentNum);
-    setRes(res2);
+    console.log(mathAction(operator, res, currentNum));
+    const {resNum, resTxt} = mathAction(operator, res, currentNum);
+    setRes(resNum);
     console.log('res', res);
-    setScoreboard(res2);
+    setScoreboard(resNum);
+    setHistory(resTxt);
     setOperator(null);
     setIsNewScore(true);
     setRes(0);
@@ -69,6 +73,7 @@ const Calc = ()=>{
     return (
        
         <div className="calculator">
+          <div className="scoreboardTxt">{history}</div>
   <Scoreboard scoreboard={scoreboard}/>
   <div className="buttons">
 <Operators handleOperators={handleOperators}/>
@@ -76,7 +81,6 @@ const Calc = ()=>{
     <div className="equal" onClick={handleRes}>=</div>
   </div>
 </div>
-      
     );
 }
 export default Calc;
