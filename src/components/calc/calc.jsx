@@ -56,8 +56,8 @@ const Calc = () => {
     if (operator) {
       console.log(mathAction(operator, res, currentNum));
       const { resNum, resTxt } = mathAction(operator, res, currentNum);
-      setRes(resNum);
-      console.log("res", res); // почему тут не верное значение, а предыдушее???
+      // setRes(resNum);
+      // console.log("res", res); // почему тут не верное значение, а предыдушее???
       setScoreboard(resNum);
       setHistory(resTxt);
       setOperator(null);
